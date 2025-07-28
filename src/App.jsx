@@ -25,7 +25,11 @@ if(!authReady){
     <>
     <Navbar/>
     <Routes>
-<Route path="/" element={<Home/>}/>
+<Route path="/" element={
+  <PublicRoute>
+    <Home/>
+  </PublicRoute>
+  }/>
 <Route path="/register" element={
   <PublicRoute>
     <SignupPage/>
