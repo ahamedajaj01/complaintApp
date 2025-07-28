@@ -76,7 +76,8 @@ Build complaintApp from the source and install dependencies:
    ```bash
    npm install
 
-   Usage
+
+ 4.  **Usage**
    Run the project with:
 
 Using npm:
