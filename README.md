@@ -68,8 +68,18 @@ Build complaintApp from the source and install dependencies:
 
    ```bash
    git clone https://github.com/ahamedajaj01/complaintApp
-cd complaintApp
-npm install
-npm start
-```
+
+2. **Navigate to the project directory**:
+   ```bash
+   cd complaintApp
+3. **Install the dependencies**:
+   ```bash
+   npm install
+
+   Usage
+   Run the project with:
+
+Using npm:
+```bash
+npm run dev
 
