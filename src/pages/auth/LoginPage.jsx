@@ -21,6 +21,7 @@ const handleLogin = async (formData) => {
   // Dispatch the loginUser thunk with email and password
   const result = await dispatch(loginUser({ email, password }));
 
+
   // Check if login succeeded
   if (loginUser.fulfilled.match(result)) {
     // After login, fetch current user details
@@ -51,7 +52,7 @@ const handleLogin = async (formData) => {
         }else{
            navigate("/userDashboard");
         }
-      }, 2000); // Redirect after 2 seconds
+      }, 250); // Redirect after 2 seconds
 
       return true;
     } else {
@@ -62,7 +63,7 @@ const handleLogin = async (formData) => {
     }
   } else {
     // Login failed (wrong password, user not found, etc.)
-    showAlert("error", "Login failed");
+    showAlert("error", "Login failed, please check your credentials.");
     return false;
   }
 };

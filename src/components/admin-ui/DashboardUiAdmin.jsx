@@ -1,10 +1,11 @@
 import React, { useEffect,useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllComplaints,updateComplaint } from '../../appFeatures/complainSlice';
-import {Input} from "../../components/index"
+import {Input,useAlert,Alert} from "../../components/index"
 
 
 function DashboardUiAdmin() {
+  const [alert, showAlert] = useAlert(3000)
   const [formData, setFormData] = useState({});
   const [selectedStatus, setSelectedStatus] = useState("")
   const dispatch = useDispatch()
@@ -20,12 +21,12 @@ const handleUpdateComplaint = (comp) => {
   };
 
   dispatch(updateComplaint({ complaintId: comp.$id, updatedData: updated }));
+  showAlert("success", "Status updated successfully!");
 };
 
   useEffect(()=>{
     if(userData && userData.$id){
     dispatch(fetchAllComplaints())
- 
   }
   },[dispatch,userData])
 
@@ -35,17 +36,22 @@ e.preventDefault()
 setSelectedStatus(e.target.value)
 }
 
+const filteredComplaints = adminComplaints.filter(comp => {
+  return selectedStatus === "" || comp.status === selectedStatus;
+})
 
-  if (loading) return <p>Loading complaints...</p>;
   if (error) return <p className="text-danger">{error}</p>;
 
   return (
    <>
     <div className="container my-5">
+      
    {/* Header & Filter Row */}
   <div className="d-flex justify-content-between align-items-center mb-4">
+
     <h2 className="text-center flex-grow-1">📋 All User Complaints</h2>
     <div className="ms-3">
+  
       <Input
         label="Filter by Status"
         type="select"
@@ -55,13 +61,20 @@ setSelectedStatus(e.target.value)
       />
     </div>
   </div>
+    {/* Alert msg show here */}
+    {alert.message && (
+              <Alert type={alert.type} message={alert.message} />
+            )}
   {/* Complaint List */}
-  {adminComplaints.length === 0 ? (
-    <div className="alert alert-info text-center">No complaints found.</div>
+  {filteredComplaints.length === 0 ? (
+    <div className="alert alert-info text-center">
+    {selectedStatus
+      ? `No complaints found with status "${selectedStatus}".`
+      : "No complaints available."}
+  </div>
   ) : (
     <div className="row g-4">
-      {adminComplaints.filter(comp => selectedStatus === "" || comp.status === selectedStatus)
-      .map((comp) => (
+      {filteredComplaints.map((comp) => (
         <div key={comp.$id} className="col-md-6">
           <div className="card shadow-sm border-0 h-100">
             <div className="card-body">

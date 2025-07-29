@@ -13,7 +13,7 @@ const role = userData?.prefs?.role;
     }
     // If user is not authenticated, redirect to login
     if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/NoPageFound" replace />;
     }
     // If user is authenticated and an admin, allow access to the children
     return children;
