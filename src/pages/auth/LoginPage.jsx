@@ -1,5 +1,3 @@
-import React,{useEffect} from 'react'
-import {Link} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import {loginUser, checkCurrentUser, logoutUser} from "../../appFeatures/authSlice"
 import {LoginForm,Alert,useAlert} from "../../components/index"
